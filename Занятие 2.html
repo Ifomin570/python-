@@ -3,445 +3,349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Алгоритмы — презентация</title>
+<title>Алгоритм — презентация</title>
 <style>
 :root{
- --bg:#06111f;--bg2:#081a31;--card:#0d2441;--card2:#102d50;
- --blue:#168cff;--cyan:#42cfff;--text:#eef8ff;--muted:#a4b9ce;
- --line:rgba(66,207,255,.22);--shadow:0 20px 55px rgba(0,0,0,.35)
+ --bg:#06111f;--bg2:#091a30;--card:#0d2441;--card2:#102d50;
+ --blue:#168cff;--cyan:#39c9ff;--white:#eef7ff;--muted:#9fb7cf;
+ --line:rgba(57,201,255,.22);--good:#67e0ba;--warn:#ffd36b;
 }
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
-font-family:Inter,Segoe UI,Arial,sans-serif;overflow:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;
-background:radial-gradient(circle at 85% 10%,rgba(22,140,255,.20),transparent 28%),
-radial-gradient(circle at 8% 90%,rgba(66,207,255,.10),transparent 25%)}
-.deck{height:100vh;position:relative}
-.slide{display:none;height:100vh;padding:52px 7vw 72px;overflow:auto;position:relative}
-.slide.active{display:flex;flex-direction:column;animation:fade .25s ease}
-@keyframes fade{from{opacity:.1;transform:translateX(12px)}to{opacity:1;transform:none}}
-.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--cyan);font-weight:800}
-h1{font-size:clamp(42px,5.6vw,78px);line-height:1.02;margin:15px 0 20px}
-h2{font-size:clamp(32px,4vw,55px);line-height:1.05;margin:12px 0 28px}
-h3{font-size:21px;margin:0 0 9px}
-p,li{font-size:18px;line-height:1.52;color:#dceaf6}
-.muted{color:var(--muted)}
-.accent{color:var(--cyan)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{background:linear-gradient(145deg,rgba(16,45,80,.96),rgba(7,27,49,.96));
-border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:var(--shadow)}
-.card p{margin:5px 0}
-.big{font-size:48px;font-weight:900;color:var(--cyan);margin-bottom:4px}
-.tag{display:inline-block;border:1px solid rgba(66,207,255,.35);border-radius:999px;
-padding:6px 11px;margin:3px;color:#b9edff;background:rgba(66,207,255,.06);font-size:13px}
-.code{background:#030b15;border:1px solid #183b5b;border-radius:15px;padding:19px;
-font:16px/1.65 Consolas,monospace;color:#d6edff;white-space:pre-wrap}
-.keyword{color:#6bbcff}.string{color:#91e8d2}.comment{color:#71869b}.func{color:#d7b6ff}
-.quote{font-size:26px;line-height:1.4;border-left:4px solid var(--blue);
-padding:7px 0 7px 20px;color:#edf9ff}
-.timeline{display:flex;gap:10px;margin-top:15px}
-.step{flex:1;background:#0c2645;border:1px solid var(--line);border-radius:15px;padding:17px}
-.step b{display:block;color:var(--cyan);font-size:21px;margin-bottom:7px}
-.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}
-.flow .box{background:#0e2c4d;border:1px solid var(--line);padding:17px 22px;border-radius:14px;text-align:center}
-.arrow{font-size:28px;color:var(--cyan)}
-.footer{position:absolute;left:7vw;right:7vw;bottom:21px;display:flex;
-justify-content:space-between;color:#68849e;font-size:12px}
-.nav{position:fixed;right:22px;bottom:20px;z-index:20;display:flex;gap:7px}
-button{background:#0d2948;border:1px solid var(--line);color:#e4f6ff;border-radius:11px;
-padding:10px 13px;cursor:pointer}
-button:hover{background:#123b65}
-.progress{position:fixed;top:0;left:0;height:4px;width:0;
-background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:30}
-.center{justify-content:center}
-.hero{max-width:1000px;padding:32px;border-radius:24px;
-background:linear-gradient(135deg,rgba(15,54,91,.92),rgba(5,22,39,.95));
-border:1px solid rgba(66,207,255,.25)}
-table{width:100%;border-collapse:collapse;font-size:16px}
-th,td{border:1px solid var(--line);padding:11px;text-align:left}
-th{color:var(--cyan);background:#0c2848}
-kbd{background:#102d4c;border:1px solid #245374;border-radius:6px;padding:2px 7px}
-.note{border-left:3px solid var(--cyan);padding:10px 15px;background:rgba(66,207,255,.05);border-radius:8px}
-@media(max-width:800px){.grid,.grid3{grid-template-columns:1fr}.timeline{flex-direction:column}
-.slide{padding:40px 5vw 70px}p,li{font-size:16px}}
+*{box-sizing:border-box} html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:Segoe UI,Inter,Arial,sans-serif;background:var(--bg);color:var(--white)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
+radial-gradient(circle at 80% 10%,rgba(22,140,255,.18),transparent 28%),
+radial-gradient(circle at 10% 90%,rgba(57,201,255,.10),transparent 28%)}
+.deck{height:100vh}.slide{display:none;height:100vh;padding:52px 7vw 70px;position:relative;overflow:auto}
+.slide.active{display:flex;flex-direction:column;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.kicker{color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:clamp(42px,5.5vw,78px);line-height:1.02;margin:14px 0 22px}
+h2{font-size:clamp(32px,4vw,54px);line-height:1.06;margin:10px 0 28px}
+h3{margin:0 0 10px;font-size:21px} p,li{font-size:18px;line-height:1.55;color:#dceafa}
+.muted{color:var(--muted)} .accent{color:var(--cyan)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(145deg,rgba(16,45,80,.95),rgba(7,25,45,.95));border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
+.card p{margin:6px 0}.num{font-size:45px;font-weight:900;color:var(--cyan);margin-bottom:5px}
+.tag{display:inline-block;border:1px solid rgba(57,201,255,.38);border-radius:999px;padding:6px 11px;color:#bcefff;margin:3px;font-size:13px}
+.code{background:#020913;border:1px solid #173c5d;border-radius:14px;padding:18px 20px;font:16px/1.65 Consolas,monospace;color:#d5edff;white-space:pre-wrap}
+.kw{color:#70bbff}.str{color:#91e5cf}.com{color:#71869b}.fn{color:#d6b2ff}
+.flow{display:flex;gap:10px;align-items:stretch;margin:20px 0}
+.flow .item{flex:1;background:#0c2848;border:1px solid var(--line);border-radius:14px;padding:17px}
+.flow b{display:block;color:var(--cyan);font-size:21px;margin-bottom:7px}
+.quote{border-left:4px solid var(--blue);padding:8px 0 8px 20px;font-size:25px;line-height:1.4;color:#eaf7ff}
+.diagram{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px}
+.node{background:#0d2b4d;border:1px solid #2a78ae;padding:14px 22px;border-radius:12px;text-align:center;min-width:250px}
+.arrow{color:var(--cyan);font-size:25px}
+.footer{position:absolute;bottom:20px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:#67849f;font-size:12px}
+.nav{position:fixed;right:22px;bottom:18px;z-index:20;display:flex;gap:7px}
+button{background:#0d2848;color:#e9f7ff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
+button:hover{background:#154268}.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:30;width:0}
+table{width:100%;border-collapse:collapse;font-size:16px}th,td{border:1px solid var(--line);padding:12px;text-align:left}th{color:var(--cyan);background:#0c2949}
+kbd{background:#102e4d;border:1px solid #2b5575;border-radius:6px;padding:2px 7px}
+.center{margin:auto 0}.check li{margin:8px 0}
+@media(max-width:800px){.grid,.grid3{grid-template-columns:1fr}.flow{flex-direction:column}.slide{padding:38px 5vw 70px}p,li{font-size:16px}}
 </style>
 </head>
 <body>
-<div class="deck">
-<div class="progress" id="progress"></div>
+<div class="deck"><div class="progress" id="progress"></div>
 
-<section class="slide active"><div class="center" style="margin:auto 0">
-<div class="kicker">Основы алгоритмизации</div>
-<h1>Алгоритм.<br><span class="accent">Понятие и виды</span></h1>
-<p style="font-size:25px;max-width:900px">Как превратить задачу в понятную последовательность действий — и почему алгоритмы окружают нас каждый день.</p>
-<div style="margin-top:24px"><span class="tag">Линейные</span><span class="tag">Разветвлённые</span><span class="tag">Циклические</span><span class="tag">Практика</span></div>
-</div><div class="footer"><span>АЛГОРИТМЫ · ВВЕДЕНИЕ</span><span>01</span></div></section>
+<section class="slide active"><div class="center">
+<div class="kicker">Раздел · Основы алгоритмизации</div>
+<h1>Алгоритм.<br><span class="accent">Понятие и типы алгоритмов</span></h1>
+<p style="font-size:25px;max-width:900px">От повседневных инструкций — к программному коду: линейные, разветвлённые и циклические алгоритмы.</p>
+<div style="margin-top:24px"><span class="tag">Теория</span><span class="tag">Примеры из жизни</span><span class="tag">Схемы</span><span class="tag">Практика</span></div>
+</div><div class="footer"><span>АЛГОРИТМИЗАЦИЯ И ПРОГРАММИРОВАНИЕ</span><span>01</span></div></section>
 
-<section class="slide"><div class="kicker">01 · Цели</div><h2>Что изучим сегодня?</h2>
+<section class="slide"><div class="kicker">01 · Цели</div><h2>Что изучим на занятии?</h2>
 <div class="grid3">
-<div class="card"><div class="big">01</div><h3>Понятие</h3><p>Разберём, что такое алгоритм и зачем он нужен.</p></div>
-<div class="card"><div class="big">02</div><h3>Свойства</h3><p>Узнаем признаки хорошего алгоритма.</p></div>
-<div class="card"><div class="big">03</div><h3>Жизнь</h3><p>Найдём алгоритмы в привычных действиях.</p></div>
-<div class="card"><div class="big">04</div><h3>Структуры</h3><p>Познакомимся с тремя базовыми типами алгоритмов.</p></div>
-<div class="card"><div class="big">05</div><h3>Схемы</h3><p>Научимся читать простые блок-схемы.</p></div>
-<div class="card"><div class="big">06</div><h3>Практика</h3><p>Составим собственные алгоритмы и проверим их.</p></div>
-</div><div class="footer"><span>ОТ ПРОБЛЕМЫ → К АЛГОРИТМУ</span><span>02</span></div></section>
+<div class="card"><div class="num">01</div><h3>Понятие</h3><p>Узнаем, что такое алгоритм и зачем он нужен.</p></div>
+<div class="card"><div class="num">02</div><h3>Свойства</h3><p>Разберём основные требования к хорошему алгоритму.</p></div>
+<div class="card"><div class="num">03</div><h3>Жизнь</h3><p>Найдём алгоритмы в бытовых и профессиональных ситуациях.</p></div>
+<div class="card"><div class="num">04</div><h3>Типы</h3><p>Изучим линейные, разветвлённые и циклические алгоритмы.</p></div>
+<div class="card"><div class="num">05</div><h3>Схемы</h3><p>Научимся читать простые блок-схемы.</p></div>
+<div class="card"><div class="num">06</div><h3>Программирование</h3><p>Свяжем алгоритмы с будущим кодом на Python.</p></div>
+</div><div class="footer"><span>ОТ АЛГОРИТМА К ПРОГРАММЕ</span><span>02</span></div></section>
 
-<section class="slide"><div class="kicker">02 · Введение</div><h2>Представьте обычное утро</h2>
-<div class="hero"><p style="font-size:23px">Будильник прозвенел. Нужно собраться, позавтракать и вовремя прийти на занятия.</p>
-<p>Вы выполняете множество действий в определённом порядке, принимаете решения и иногда повторяете действия.</p></div>
-<div class="flow">
-<div class="box">Проснуться</div><div class="arrow">→</div>
-<div class="box">Умыться</div><div class="arrow">→</div>
-<div class="box">Позавтракать</div><div class="arrow">→</div>
-<div class="box">Собраться</div><div class="arrow">→</div>
-<div class="box">Выйти</div>
-</div>
-<p class="quote">Мы используем алгоритмы постоянно, даже если не называем их алгоритмами.</p>
-<div class="footer"><span>АЛГОРИТМЫ ЕСТЬ В ПОВСЕДНЕВНОЙ ЖИЗНИ</span><span>03</span></div></section>
-
-<section class="slide"><div class="kicker">03 · Понятие</div><h2>Что такое алгоритм?</h2>
-<div class="hero"><p style="font-size:25px"><b>Алгоритм</b> — это конечная, понятная и упорядоченная последовательность действий, предназначенная для решения задачи или получения результата.</p></div>
+<section class="slide"><div class="kicker">02 · Понятие</div><h2>Что такое алгоритм?</h2>
+<div class="hero card"><p class="quote">Алгоритм — это конечная, понятная и упорядоченная последовательность действий, которая приводит к решению задачи или получению результата.</p></div>
 <div class="grid" style="margin-top:20px">
-<div class="card"><h3>Последовательность</h3><p>Действия расположены в определённом порядке.</p></div>
-<div class="card"><h3>Понятность</h3><p>Каждый шаг должен быть однозначно понятен исполнителю.</p></div>
-<div class="card"><h3>Конечность</h3><p>Алгоритм должен завершаться за конечное число шагов.</p></div>
-<div class="card"><h3>Результативность</h3><p>Выполнение должно приводить к ожидаемому результату.</p></div>
+<div class="card"><h3>Просто</h3><p>Алгоритм отвечает на вопрос: <b>«Что и в каком порядке нужно сделать?»</b></p></div>
+<div class="card"><h3>В программировании</h3><p>Алгоритм описывает логику решения, а программа записывает эту логику на языке программирования.</p></div>
 </div>
-<div class="footer"><span>АЛГОРИТМ = ПЛАН РЕШЕНИЯ ЗАДАЧИ</span><span>04</span></div></section>
+<div class="footer"><span>АЛГОРИТМ = ПЛАН ДЕЙСТВИЙ ДЛЯ ПОЛУЧЕНИЯ РЕЗУЛЬТАТА</span><span>03</span></div></section>
 
-<section class="slide"><div class="kicker">04 · Алгоритмизация</div><h2>Задача → алгоритм → программа</h2>
-<div class="flow">
-<div class="box"><b>Проблема</b><br><span class="muted">Что нужно получить?</span></div>
-<div class="arrow">→</div>
-<div class="box"><b>Алгоритм</b><br><span class="muted">Как это сделать?</span></div>
-<div class="arrow">→</div>
-<div class="box"><b>Программа</b><br><span class="muted">Как записать алгоритм?</span></div>
-<div class="arrow">→</div>
-<div class="box"><b>Результат</b><br><span class="muted">Что получилось?</span></div>
-</div>
-<div class="card"><h3>Пример: найти сумму двух чисел</h3>
-<ol><li>Получить первое число.</li><li>Получить второе число.</li><li>Сложить числа.</li><li>Вывести сумму.</li></ol></div>
-<div class="footer"><span>АЛГОРИТМИЧЕСКОЕ МЫШЛЕНИЕ ПРЕДШЕСТВУЕТ КОДУ</span><span>05</span></div></section>
-
-<section class="slide"><div class="kicker">05 · Свойства</div><h2>Основные свойства алгоритма</h2>
+<section class="slide"><div class="kicker">03 · Жизнь</div><h2>Алгоритмы окружают нас</h2>
 <div class="grid3">
-<div class="card"><h3>Дискретность</h3><p>Алгоритм состоит из отдельных шагов.</p></div>
-<div class="card"><h3>Определённость</h3><p>Каждый шаг не должен допускать противоречивого толкования.</p></div>
-<div class="card"><h3>Конечность</h3><p>Количество шагов не бесконечно.</p></div>
-<div class="card"><h3>Результативность</h3><p>После выполнения получается результат.</p></div>
-<div class="card"><h3>Массовость</h3><p>Алгоритм часто применим к целому классу похожих задач.</p></div>
-<div class="card"><h3>Исполнимость</h3><p>Каждое действие должно быть выполнимо выбранным исполнителем.</p></div>
-</div>
-<div class="footer"><span>ХОРОШИЙ АЛГОРИТМ ДОЛЖЕН БЫТЬ ВЫПОЛНИМЫМ И ПОНЯТНЫМ</span><span>06</span></div></section>
-
-<section class="slide"><div class="kicker">06 · Исполнитель</div><h2>Кто может выполнять алгоритм?</h2>
-<p class="quote">Исполнитель — тот, кто способен понять команды алгоритма и выполнить их.</p>
-<div class="grid3">
-<div class="card"><h3>👤 Человек</h3><p>Следует инструкции, например инструкции по сборке мебели.</p></div>
-<div class="card"><h3>🤖 Робот</h3><p>Выполняет команды управления движением и действиями.</p></div>
-<div class="card"><h3>💻 Компьютер</h3><p>Выполняет команды программы в соответствии с правилами языка.</p></div>
-</div>
-<div class="note" style="margin-top:20px"><b>Важно:</b> команда «сделай красиво» может быть понятна человеку в контексте, но плохо подходит для автоматического исполнителя.</div>
-<div class="footer"><span>КОМАНДЫ ДОЛЖНЫ СООТВЕТСТВОВАТЬ ВОЗМОЖНОСТЯМ ИСПОЛНИТЕЛЯ</span><span>07</span></div></section>
-
-<section class="slide"><div class="kicker">07 · Жизнь</div><h2>Где мы встречаем алгоритмы?</h2>
-<div class="grid3">
-<div class="card"><h3>🍳 Рецепт</h3><p>Ингредиенты → действия → готовое блюдо.</p></div>
-<div class="card"><h3>🧭 Навигатор</h3><p>Получить координаты → построить маршрут → предложить путь.</p></div>
-<div class="card"><h3>🏧 Банкомат</h3><p>Проверить карту → проверить операцию → выдать результат.</p></div>
-<div class="card"><h3>🛒 Интернет-магазин</h3><p>Поиск → фильтрация → выбор → оформление.</p></div>
+<div class="card"><h3>🍳 Рецепт</h3><p>Подготовить продукты → приготовить → подать.</p></div>
+<div class="card"><h3>🏧 Банкомат</h3><p>Вставить карту → ввести PIN → выбрать операцию → получить результат.</p></div>
+<div class="card"><h3>🚦 Светофор</h3><p>Сигналы сменяются по определённой последовательности.</p></div>
+<div class="card"><h3>🚌 Маршрут</h3><p>Выбрать остановку → сесть в транспорт → следовать маршруту → выйти.</p></div>
 <div class="card"><h3>📱 Приложение</h3><p>Получить действие пользователя → обработать → показать результат.</p></div>
-<div class="card"><h3>🚦 Светофор</h3><p>Смена сигналов по заданным правилам и времени.</p></div>
+<div class="card"><h3>🛒 Покупка</h3><p>Выбрать товар → добавить → оформить → оплатить.</p></div>
 </div>
-<div class="footer"><span>АЛГОРИТМЫ — ОСНОВА АВТОМАТИЗАЦИИ</span><span>08</span></div></section>
+<p class="quote" style="margin-top:20px">Алгоритм не обязательно связан с компьютером.</p>
+<div class="footer"><span>АЛГОРИТМЫ ЕСТЬ В БЫТУ, ТЕХНИКЕ И ПРОГРАММАХ</span><span>04</span></div></section>
 
-<section class="slide"><div class="kicker">08 · Реальный пример</div><h2>Алгоритм приготовления чая</h2>
+<section class="slide"><div class="kicker">04 · Пример</div><h2>Алгоритм приготовления чая</h2>
 <div class="flow">
-<div class="box">Взять чашку</div><div class="arrow">→</div>
-<div class="box">Положить чай</div><div class="arrow">→</div>
-<div class="box">Нагреть воду</div><div class="arrow">→</div>
-<div class="box">Залить водой</div><div class="arrow">→</div>
-<div class="box">Подождать</div>
+<div class="item"><b>1</b>Налить воду</div><div class="item"><b>2</b>Нагреть воду</div><div class="item"><b>3</b>Положить чай</div><div class="item"><b>4</b>Залить водой</div><div class="item"><b>5</b>Подождать</div>
 </div>
-<div class="card"><h3>Но можно сделать алгоритм точнее</h3>
-<ol><li>Налить воду в чайник.</li><li>Включить чайник.</li><li>Дождаться нагрева воды.</li><li>Положить пакетик чая в чашку.</li><li>Налить горячую воду.</li><li>Подождать 3–5 минут.</li></ol></div>
-<p class="muted">Чем точнее инструкции, тем меньше вероятность неправильного результата.</p>
-<div class="footer"><span>ПРИМЕР ЛИНЕЙНОГО АЛГОРИТМА</span><span>09</span></div></section>
+<div class="card"><h3>Почему это алгоритм?</h3><ul class="check"><li>действия расположены в определённом порядке;</li><li>каждый шаг понятен исполнителю;</li><li>есть конечный результат;</li><li>если нарушить порядок, результат может измениться.</li></ul></div>
+<div class="footer"><span>ПЕРВЫЙ ПРИМЕР — ПОСЛЕДОВАТЕЛЬНОСТЬ ДЕЙСТВИЙ</span><span>05</span></div></section>
 
-<section class="slide"><div class="kicker">09 · Представление</div><h2>Как можно записать алгоритм?</h2>
+<section class="slide"><div class="kicker">05 · Свойства</div><h2>Каким должен быть алгоритм?</h2>
 <div class="grid3">
-<div class="card"><h3>Текст</h3><p>Обычные пронумерованные шаги.</p><div class="code">1. Ввести A
-2. Ввести B
-3. C = A + B
-4. Вывести C</div></div>
-<div class="card"><h3>Псевдокод</h3><p>Запись, похожая на код, но без привязки к конкретному языку.</p><div class="code">Ввод A, B
-C ← A + B
-Вывод C</div></div>
-<div class="card"><h3>Блок-схема</h3><p>Графическое представление шагов, условий и повторений.</p><div class="flow" style="margin:8px 0"><div class="box">Начало</div><div class="arrow">↓</div><div class="box">Действие</div><div class="arrow">↓</div><div class="box">Конец</div></div></div>
+<div class="card"><h3>Определённость</h3><p>Каждый шаг должен быть однозначно понятен.</p></div>
+<div class="card"><h3>Дискретность</h3><p>Алгоритм состоит из отдельных шагов или команд.</p></div>
+<div class="card"><h3>Конечность</h3><p>Для конкретной задачи алгоритм должен завершаться.</p></div>
+<div class="card"><h3>Результативность</h3><p>Выполнение должно приводить к ожидаемому результату.</p></div>
+<div class="card"><h3>Массовость</h3><p>Алгоритм может применяться к целому классу похожих задач.</p></div>
+<div class="card"><h3>Понятность</h3><p>Исполнитель должен понимать предусмотренные действия.</p></div>
 </div>
-<div class="footer"><span>РАЗНЫЕ ФОРМЫ — ОДНА ЛОГИКА</span><span>10</span></div></section>
+<div class="footer"><span>СВОЙСТВА ПОМОГАЮТ ОТЛИЧИТЬ АЛГОРИТМ ОТ СЛУЧАЙНОГО НАБОРА ДЕЙСТВИЙ</span><span>06</span></div></section>
 
-<section class="slide"><div class="kicker">10 · Блок-схемы</div><h2>Основные элементы блок-схемы</h2>
-<div class="grid">
-<div class="card"><h3>Овал — начало / конец</h3><p>Показывает точку входа или завершения алгоритма.</p></div>
-<div class="card"><h3>Прямоугольник — действие</h3><p>Описывает операцию: вычисление, присваивание, действие.</p></div>
-<div class="card"><h3>Ромб — условие</h3><p>Проверяет условие и направляет выполнение по одному из вариантов.</p></div>
-<div class="card"><h3>Параллелограмм — ввод / вывод</h3><p>Используется для получения или отображения данных.</p></div>
-</div>
-<div class="note" style="margin-top:18px">Стрелки показывают направление выполнения алгоритма.</div>
-<div class="footer"><span>БЛОК-СХЕМА ПОМОГАЕТ «УВИДЕТЬ» АЛГОРИТМ</span><span>11</span></div></section>
-
-<section class="slide"><div class="kicker">11 · Тип 1</div><h2>Линейный алгоритм</h2>
-<div class="hero"><p style="font-size:24px"><b>Линейный алгоритм</b> — алгоритм, в котором команды выполняются последовательно, одна за другой, без выбора и повторения.</p></div>
+<section class="slide"><div class="kicker">06 · Алгоритм и программа</div><h2>От идеи к коду</h2>
 <div class="flow">
-<div class="box">Начало</div><div class="arrow">→</div><div class="box">Действие 1</div>
-<div class="arrow">→</div><div class="box">Действие 2</div><div class="arrow">→</div>
-<div class="box">Действие 3</div><div class="arrow">→</div><div class="box">Конец</div>
+<div class="item"><b>Задача</b>Что нужно получить?</div>
+<div class="item"><b>Алгоритм</b>Какие шаги выполнить?</div>
+<div class="item"><b>Код</b>Как записать шаги на языке?</div>
+<div class="item"><b>Программа</b>Как компьютер выполнит решение?</div>
 </div>
-<div class="grid">
-<div class="card"><h3>Пример</h3><p>Найти площадь прямоугольника:</p><div class="code">Ввести a
-Ввести b
-S = a * b
-Вывести S</div></div>
-<div class="card"><h3>Главный признак</h3><p>Нет вопросов вида «если… то…» и нет повторения одного и того же блока.</p></div>
-</div>
-<div class="footer"><span>ТИП 1 · ПОСЛЕДОВАТЕЛЬНОСТЬ</span><span>12</span></div></section>
+<div class="card" style="margin-top:18px"><h3>Пример: сложить два числа</h3><div class="code">1. Получить число A
+2. Получить число B
+3. Вычислить A + B
+4. Вывести сумму</div></div>
+<p class="muted">Один и тот же алгоритм можно реализовать на разных языках программирования.</p>
+<div class="footer"><span>АЛГОРИТМ — ЛОГИКА РЕШЕНИЯ, КОД — ЕЁ ЗАПИСЬ</span><span>07</span></div></section>
 
-<section class="slide"><div class="kicker">12 · Тип 1</div><h2>Линейный алгоритм в Python</h2>
-<div class="code">a = <span class="func">float</span>(<span class="func">input</span>(<span class="string">"Введите длину: "</span>))
-b = <span class="func">float</span>(<span class="func">input</span>(<span class="string">"Введите ширину: "</span>))
-
-s = a * b
-
-<span class="func">print</span>(<span class="string">"Площадь:"</span>, s)</div>
-<div class="grid" style="margin-top:18px">
-<div class="card"><h3>Шаг 1</h3><p>Получаем длину.</p></div>
-<div class="card"><h3>Шаг 2</h3><p>Получаем ширину.</p></div>
-<div class="card"><h3>Шаг 3</h3><p>Умножаем значения.</p></div>
-<div class="card"><h3>Шаг 4</h3><p>Выводим результат.</p></div>
-</div>
-<div class="footer"><span>КОД — ОДНА ИЗ ФОРМ ЗАПИСИ АЛГОРИТМА</span><span>13</span></div></section>
-
-<section class="slide"><div class="kicker">13 · Тип 2</div><h2>Разветвлённый алгоритм</h2>
-<div class="hero"><p style="font-size:24px"><b>Разветвлённый алгоритм</b> содержит условие. В зависимости от результата проверки выбирается один из вариантов действий.</p></div>
-<div class="flow">
-<div class="box">Начало</div><div class="arrow">→</div><div class="box">Проверка условия?</div>
-</div>
-<div class="grid">
-<div class="card"><h3>Да / True</h3><p>Условие истинно → выполняется ветвь A.</p></div>
-<div class="card"><h3>Нет / False</h3><p>Условие ложно → выполняется ветвь B.</p></div>
-</div>
-<div class="code" style="margin-top:18px"><span class="keyword">if</span> температура &gt; 20:
-&nbsp;&nbsp;взять лёгкую одежду
-<span class="keyword">else</span>:
-&nbsp;&nbsp;взять тёплую одежду</div>
-<div class="footer"><span>ТИП 2 · ВЫБОР</span><span>14</span></div></section>
-
-<section class="slide"><div class="kicker">14 · Тип 2</div><h2>Примеры разветвления</h2>
+<section class="slide"><div class="kicker">07 · Типы</div><h2>Три основных типа алгоритмов</h2>
 <div class="grid3">
-<div class="card"><h3>🌧 Погода</h3><p>Если идёт дождь → взять зонт. Иначе → идти без зонта.</p></div>
-<div class="card"><h3>🔐 Пароль</h3><p>Если пароль верный → доступ разрешён. Иначе → отказ.</p></div>
-<div class="card"><h3>🎓 Оценка</h3><p>Если балл ≥ порога → зачёт. Иначе → нужна доработка.</p></div>
-<div class="card"><h3>🛒 Покупка</h3><p>Если товара достаточно → оформить. Иначе → сообщить о нехватке.</p></div>
-<div class="card"><h3>🚦 Переход</h3><p>Если зелёный → можно переходить. Иначе → ждать.</p></div>
-<div class="card"><h3>🌡 Температура</h3><p>Если холодно → надеть куртку. Иначе → выбрать лёгкую одежду.</p></div>
+<div class="card"><div class="num">01</div><h3>Линейный</h3><p>Все действия выполняются последовательно, одно за другим.</p><span class="tag">→ → →</span></div>
+<div class="card"><div class="num">02</div><h3>Разветвлённый</h3><p>В зависимости от условия выбирается один из вариантов действий.</p><span class="tag">ЕСЛИ → ТО / ИНАЧЕ</span></div>
+<div class="card"><div class="num">03</div><h3>Циклический</h3><p>Некоторые действия повторяются несколько раз.</p><span class="tag">↻ ПОВТОР</span></div>
 </div>
-<div class="footer"><span>УСЛОВИЕ СОЗДАЁТ ВЫБОР</span><span>15</span></div></section>
+<p class="quote" style="margin-top:25px">Эти три конструкции лежат в основе огромного количества программ.</p>
+<div class="footer"><span>ПОСЛЕДОВАТЕЛЬНОСТЬ · ВЫБОР · ПОВТОР</span><span>08</span></div></section>
 
-<section class="slide"><div class="kicker">15 · Тип 2</div><h2>Разветвление в Python</h2>
-<div class="code">age = <span class="func">int</span>(<span class="func">input</span>(<span class="string">"Введите возраст: "</span>))
-
-<span class="keyword">if</span> age &gt;= 18:
-    <span class="func">print</span>(<span class="string">"Условие выполнено"</span>)
-<span class="keyword">else</span>:
-    <span class="func">print</span>(<span class="string">"Условие не выполнено"</span>)</div>
-<div class="grid" style="margin-top:18px">
-<div class="card"><h3>if</h3><p>Проверяет условие.</p></div>
-<div class="card"><h3>else</h3><p>Определяет альтернативную ветвь.</p></div>
+<section class="slide"><div class="kicker">08 · Линейный</div><h2>Линейный алгоритм</h2>
+<p>Команды выполняются <b>строго последовательно</b>. Каждый следующий шаг начинается после предыдущего.</p>
+<div class="diagram">
+<div class="node">Начало</div><div class="arrow">↓</div><div class="node">Шаг 1</div><div class="arrow">↓</div><div class="node">Шаг 2</div><div class="arrow">↓</div><div class="node">Шаг 3</div><div class="arrow">↓</div><div class="node">Конец</div>
 </div>
-<p class="muted">На следующих занятиях условия будут подробно изучаться и усложняться.</p>
-<div class="footer"><span>УСЛОВИЯ ПОЗВОЛЯЮТ ПРОГРАММЕ «ПРИНИМАТЬ РЕШЕНИЯ»</span><span>16</span></div></section>
+<div class="footer"><span>ЛИНЕЙНЫЙ = НЕТ ВЫБОРА И НЕТ ПОВТОРЕНИЯ</span><span>09</span></div></section>
 
-<section class="slide"><div class="kicker">16 · Тип 3</div><h2>Циклический алгоритм</h2>
-<div class="hero"><p style="font-size:24px"><b>Циклический алгоритм</b> содержит повторение действий. Один и тот же набор команд выполняется несколько раз.</p></div>
-<div class="flow">
-<div class="box">Начало</div><div class="arrow">→</div><div class="box">Условие</div>
-<div class="arrow">→</div><div class="box">Действия</div><div class="arrow">↺</div>
-</div>
+<section class="slide"><div class="kicker">09 · Линейный</div><h2>Пример линейного алгоритма</h2>
 <div class="grid">
-<div class="card"><h3>Пример из жизни</h3><p>Пока посуда не закончилась → взять следующую тарелку → помыть → повторить.</p></div>
-<div class="card"><h3>Пример в программе</h3><p>Вывести числа от 1 до 10, не записывая команду <kbd>print()</kbd> десять раз.</p></div>
+<div class="card"><h3>Задача</h3><p>Найти стоимость покупки двух одинаковых товаров.</p><div class="code">1. Ввести цену
+2. Умножить цену на 2
+3. Вывести стоимость</div></div>
+<div class="card"><h3>Python</h3><div class="code">price = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"Цена: "</span>))
+total = price * 2
+<span class="fn">print</span>(<span class="str">"Стоимость:"</span>, total)</div></div>
 </div>
-<div class="footer"><span>ТИП 3 · ПОВТОРЕНИЕ</span><span>17</span></div></section>
+<div class="card" style="margin-top:18px"><h3>Где встречается?</h3><p>Расчёт площади, перевод единиц, вычисление стоимости, последовательная обработка данных.</p></div>
+<div class="footer"><span>ЛИНЕЙНЫЕ АЛГОРИТМЫ — ОСНОВА ПЕРВЫХ ПРОГРАММ</span><span>10</span></div></section>
 
-<section class="slide"><div class="kicker">17 · Тип 3</div><h2>Циклы в Python</h2>
-<div class="code"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="func">range</span>(1, 6):
-    <span class="func">print</span>(i)</div>
+<section class="slide"><div class="kicker">10 · Разветвлённый</div><h2>Разветвлённый алгоритм</h2>
+<p>Программа должна принять решение. Для этого проверяется <b>условие</b>.</p>
+<div class="diagram">
+<div class="node">Начало</div><div class="arrow">↓</div><div class="node">Проверить условие</div>
+<div class="flow" style="width:80%;margin:0"><div class="item"><b>ДА</b>Выполнить вариант A</div><div class="item"><b>НЕТ</b>Выполнить вариант B</div></div>
+<div class="node">Общее продолжение</div><div class="arrow">↓</div><div class="node">Конец</div>
+</div>
+<div class="footer"><span>РАЗВЕТВЛЕНИЕ = ВЫБОР ПУТИ ПО УСЛОВИЮ</span><span>11</span></div></section>
+
+<section class="slide"><div class="kicker">11 · Условие</div><h2>Пример из жизни: переход дороги</h2>
+<div class="grid">
+<div class="card"><h3>Алгоритм</h3><ol class="check"><li>Подойти к переходу.</li><li>Проверить сигнал светофора.</li><li><b>Если</b> разрешающий сигнал — перейти по правилам.</li><li><b>Иначе</b> — дождаться разрешающего сигнала.</li></ol></div>
+<div class="card"><h3>Логика</h3><div class="code"><span class="kw">если</span> сигнал разрешает:
+    перейти
+<span class="kw">иначе:</span>
+    ждать</div><p class="muted">Это уже не просто последовательность: появился выбор.</p></div>
+</div>
+<div class="footer"><span>УСЛОВИЕ ОТВЕЧАЕТ НА ВОПРОС «ВЫПОЛНЯЕТСЯ ЛИ...?»</span><span>12</span></div></section>
+
+<section class="slide"><div class="kicker">12 · Python</div><h2>Разветвление в Python: if / else</h2>
+<div class="code">age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Введите возраст: "</span>))
+
+<span class="kw">if</span> age >= 18:
+    <span class="fn">print</span>(<span class="str">"Условие выполнено"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Условие не выполнено"</span>)</div>
 <div class="grid" style="margin-top:18px">
-<div class="card"><h3>Что произойдёт?</h3><p>Команда <kbd>print(i)</kbd> выполнится для значений 1, 2, 3, 4 и 5.</p></div>
-<div class="card"><h3>Зачем цикл?</h3><p>Чтобы не дублировать одинаковый код и удобно работать с повторяющимися действиями.</p></div>
+<div class="card"><h3>if</h3><p>«Если условие истинно — выполни блок».</p></div>
+<div class="card"><h3>else</h3><p>«Иначе — выполни другой блок».</p></div>
 </div>
-<div class="card" style="margin-top:18px"><h3>Другой вариант</h3><div class="code">count = 0
-<span class="keyword">while</span> count &lt; 5:
-    <span class="func">print</span>(count)
-    count = count + 1</div></div>
-<div class="footer"><span>ЦИКЛЫ ЭКОНОМЯТ КОД И ОРГАНИЗУЮТ ПОВТОРЕНИЯ</span><span>18</span></div></section>
+<p class="muted">Синтаксис условий мы подробно изучим на следующих занятиях.</p>
+<div class="footer"><span>АЛГОРИТМ → УСЛОВИЕ → ВЫБОР В PYTHON</span><span>13</span></div></section>
 
-<section class="slide"><div class="kicker">18 · Сравнение</div><h2>Три базовых типа</h2>
+<section class="slide"><div class="kicker">13 · Циклический</div><h2>Циклический алгоритм</h2>
+<p>Некоторые действия нужно выполнить <b>многократно</b>. Цикл позволяет не записывать одну и ту же команду десятки или тысячи раз.</p>
+<div class="diagram">
+<div class="node">Начало</div><div class="arrow">↓</div><div class="node">Проверить условие</div><div class="arrow">↓</div>
+<div class="node">Выполнить повторяемые действия</div><div class="arrow">↺ Проверить снова</div><div class="node">Условие завершения → Конец</div>
+</div>
+<div class="footer"><span>ЦИКЛ = ПОВТОР ДЕЙСТВИЙ</span><span>14</span></div></section>
+
+<section class="slide"><div class="kicker">14 · Цикл</div><h2>Примеры циклов в реальной жизни</h2>
+<div class="grid3">
+<div class="card"><h3>🏋️ Повтор упражнения</h3><p>Повторить движение заданное количество раз.</p></div>
+<div class="card"><h3>🧺 Стирка</h3><p>Для каждой вещи выполнить последовательность обработки.</p></div>
+<div class="card"><h3>📋 Проверка списка</h3><p>Обработать каждый элемент списка.</p></div>
+<div class="card"><h3>🎮 Игра</h3><p>Пока игра продолжается, обновлять состояние мира.</p></div>
+<div class="card"><h3>⏰ Будильник</h3><p>Проверять время до наступления нужного момента.</p></div>
+<div class="card"><h3>📦 Склад</h3><p>Повторять операцию для каждой позиции заказа.</p></div>
+</div>
+<div class="footer"><span>КОМПЬЮТЕРЫ ОСОБЕННО СИЛЬНЫ В ПОВТОРЯЮЩИХСЯ ОПЕРАЦИЯХ</span><span>15</span></div></section>
+
+<section class="slide"><div class="kicker">15 · Python</div><h2>Цикл for в Python</h2>
+<div class="code"><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(5):
+    <span class="fn">print</span>(<span class="str">"Привет!"</span>)</div>
+<div class="card" style="margin-top:18px"><h3>Что произойдёт?</h3><p>Команда <kbd>print()</kbd> будет выполнена 5 раз.</p><p class="muted">В циклах важно понимать две вещи: <b>что повторяется</b> и <b>сколько / до какого условия повторяется</b>.</p></div>
+<div class="grid" style="margin-top:18px">
+<div class="card"><h3>Без цикла</h3><div class="code">print(<span class="str">"Привет!"</span>)
+print(<span class="str">"Привет!"</span>)
+print(<span class="str">"Привет!"</span>)
+...</div></div>
+<div class="card"><h3>С циклом</h3><div class="code"><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(5):
+    print(<span class="str">"Привет!"</span>)</div></div>
+</div>
+<div class="footer"><span>ЦИКЛ УБИРАЕТ ЛИШНЕЕ ДУБЛИРОВАНИЕ КОДА</span><span>16</span></div></section>
+
+<section class="slide"><div class="kicker">16 · Сравнение</div><h2>Три типа — три вопроса</h2>
 <table>
-<tr><th>Тип</th><th>Главная идея</th><th>Ключевой вопрос</th><th>Пример</th></tr>
-<tr><td>Линейный</td><td>Последовательность</td><td>Что делать по порядку?</td><td>Рецепт</td></tr>
-<tr><td>Разветвлённый</td><td>Выбор</td><td>Какой вариант выбрать?</td><td>Проверка пароля</td></tr>
-<tr><td>Циклический</td><td>Повторение</td><td>Что нужно повторять?</td><td>Мыть посуду</td></tr>
+<tr><th>Тип</th><th>Главный вопрос</th><th>Ключевая идея</th><th>Пример</th></tr>
+<tr><td><b>Линейный</b></td><td>Что делать по порядку?</td><td>Последовательность</td><td>Расчёт стоимости</td></tr>
+<tr><td><b>Разветвлённый</b></td><td>Какой вариант выбрать?</td><td>Условие</td><td>Если холодно — надеть куртку</td></tr>
+<tr><td><b>Циклический</b></td><td>Что нужно повторить?</td><td>Повторение</td><td>Вывести числа от 1 до 10</td></tr>
 </table>
-<div class="hero" style="margin-top:24px"><p style="font-size:22px"><b>В реальных программах эти структуры комбинируются.</b> Например: цикл может содержать условие, а внутри условия — несколько последовательных действий.</p></div>
-<div class="footer"><span>ЛИНЕЙНОСТЬ + ВЫБОР + ПОВТОРЕНИЕ</span><span>19</span></div></section>
+<div class="quote" style="margin-top:25px">Большинство реальных программ используют эти конструкции вместе.</div>
+<div class="footer"><span>ПОСЛЕДОВАТЕЛЬНОСТЬ + ВЫБОР + ПОВТОР</span><span>17</span></div></section>
 
-<section class="slide"><div class="kicker">19 · Комбинация</div><h2>Алгоритмы могут быть сложными</h2>
-<div class="flow">
-<div class="box">Получить данные</div><div class="arrow">→</div>
-<div class="box">Повторять для каждого элемента</div><div class="arrow">→</div>
-<div class="box">Проверить условие</div><div class="arrow">→</div>
-<div class="box">Выполнить действие</div>
+<section class="slide"><div class="kicker">17 · Комбинация</div><h2>В реальной программе типы объединяются</h2>
+<div class="card">
+<div class="code">Начало
+  ↓
+Ввести данные
+  ↓
+Проверить условие
+  ├── Да → выполнить действие
+  └── Нет → выполнить другое действие
+  ↓
+Повторить для следующего элемента
+  ↓
+Конец</div>
 </div>
-<div class="grid3">
-<div class="card"><h3>Линейная часть</h3><p>Получить данные.</p></div>
-<div class="card"><h3>Цикл</h3><p>Обработать каждый элемент.</p></div>
-<div class="card"><h3>Ветвление</h3><p>Выбрать действие по условию.</p></div>
-</div>
-<p class="quote" style="margin-top:22px">Большие программы строятся из небольшого числа базовых логических конструкций.</p>
-<div class="footer"><span>ИЗ ПРОСТЫХ КОНСТРУКЦИЙ СТРОЯТСЯ СЛОЖНЫЕ АЛГОРИТМЫ</span><span>20</span></div></section>
-
-<section class="slide"><div class="kicker">20 · Практика</div><h2>Задание 1. Найдите алгоритмы</h2>
-<div class="grid">
-<div class="card"><h3>Ситуация A</h3><p>Вы открываете приложение банка, вводите PIN и получаете доступ только при правильном PIN.</p><p class="accent"><b>Какой тип?</b></p></div>
-<div class="card"><h3>Ситуация B</h3><p>Программа выводит все числа от 1 до 100.</p><p class="accent"><b>Какой тип?</b></p></div>
-<div class="card"><h3>Ситуация C</h3><p>Вы собираете компьютер: установить процессор → установить память → подключить накопитель → подключить питание.</p><p class="accent"><b>Какой тип?</b></p></div>
-<div class="card"><h3>Ситуация D</h3><p>Если температура ниже 0 °C — вывести «мороз», иначе — «температура выше нуля».</p><p class="accent"><b>Какой тип?</b></p></div>
-</div>
-<p class="muted">Ответьте индивидуально, затем сравните ответы с соседом.</p>
-<div class="footer"><span>ПРАКТИКА · 5 МИНУТ</span><span>21</span></div></section>
-
-<section class="slide"><div class="kicker">21 · Практика</div><h2>Задание 2. Составьте алгоритм</h2>
-<div class="hero"><p style="font-size:22px"><b>Задача:</b> пользователь хочет приготовить бутерброд.</p></div>
-<div class="grid3" style="margin-top:20px">
-<div class="card"><h3>Шаг 1</h3><p>Определите исходные данные: какие продукты нужны?</p></div>
-<div class="card"><h3>Шаг 2</h3><p>Запишите действия в правильном порядке.</p></div>
-<div class="card"><h3>Шаг 3</h3><p>Проверьте: сможет ли другой человек выполнить инструкцию?</p></div>
-</div>
-<div class="card" style="margin-top:18px"><h3>Усложнение</h3><p>Добавьте условие: <b>если хлеба нет → выбрать другой вариант основы.</b></p></div>
-<div class="footer"><span>ПРАКТИКА · АЛГОРИТМИЧЕСКОЕ МЫШЛЕНИЕ</span><span>22</span></div></section>
-
-<section class="slide"><div class="kicker">22 · Практика</div><h2>Задание 3. Исправьте алгоритм</h2>
-<div class="card"><h3>Алгоритм «Перейти дорогу»</h3>
-<div class="code">1. Выйти на дорогу.
-2. Посмотреть на светофор.
-3. Если красный — идти.
-4. Если зелёный — стоять.
-5. Перейти улицу.</div></div>
 <div class="grid" style="margin-top:18px">
-<div class="card"><h3>Найдите ошибки</h3><p>Порядок действий, условия, безопасность, однозначность команд.</p></div>
-<div class="card"><h3>Перепишите</h3><p>Сделайте алгоритм логичным и безопасным: сначала проверка условий, затем действие.</p></div>
+<div class="card"><h3>Линейная часть</h3><p>Ввод данных и подготовка.</p></div>
+<div class="card"><h3>Разветвление</h3><p>Выбор действия по условию.</p></div>
+<div class="card"><h3>Цикл</h3><p>Повторение для нескольких данных.</p></div>
+<div class="card"><h3>Результат</h3><p>Получение и вывод информации.</p></div>
 </div>
-<div class="footer"><span>ПРАКТИКА · АНАЛИЗ АЛГОРИТМА</span><span>23</span></div></section>
+<div class="footer"><span>СЛОЖНЫЕ АЛГОРИТМЫ СОБИРАЮТСЯ ИЗ ПРОСТЫХ КОНСТРУКЦИЙ</span><span>18</span></div></section>
 
-<section class="slide"><div class="kicker">23 · Контроль</div><h2>Проверь себя</h2>
-<div class="grid3">
-<div class="card"><h3>01</h3><p>Что такое алгоритм?</p></div>
-<div class="card"><h3>02</h3><p>Назовите основные свойства алгоритма.</p></div>
-<div class="card"><h3>03</h3><p>Кто такой исполнитель алгоритма?</p></div>
-<div class="card"><h3>04</h3><p>Чем линейный алгоритм отличается от разветвлённого?</p></div>
-<div class="card"><h3>05</h3><p>Что такое цикл?</p></div>
-<div class="card"><h3>06</h3><p>Можно ли объединить разные типы алгоритмов?</p></div>
-</div>
-<div class="footer"><span>УСТНЫЙ ОПРОС · 5 МИНУТ</span><span>24</span></div></section>
-
-<section class="slide"><div class="kicker">24 · Кейc</div><h2>Обсуждаемый кейс: умный светофор</h2>
-<div class="hero"><p style="font-size:22px">Представьте светофор, который получает информацию о машинах и пешеходах. Он должен выбирать, когда продлить зелёный сигнал, а когда переключить его.</p></div>
-<div class="grid3" style="margin-top:20px">
-<div class="card"><h3>Последовательность</h3><p>Получить данные → обработать данные → изменить сигнал.</p></div>
-<div class="card"><h3>Условие</h3><p>Если много пешеходов → учитывать их поток.</p></div>
-<div class="card"><h3>Цикл</h3><p>Проверять состояние системы снова и снова.</p></div>
-</div>
-<p class="quote" style="margin-top:20px">Вопрос: где здесь линейная, разветвлённая и циклическая части?</p>
-<div class="footer"><span>ОБСУЖДЕНИЕ · 5 МИНУТ</span><span>25</span></div></section>
-
-<section class="slide"><div class="kicker">25 · Связь с Python</div><h2>Алгоритмы становятся программами</h2>
-<div class="code"><span class="comment"># Линейная часть</span>
-name = <span class="func">input</span>(<span class="string">"Имя: "</span>)
-
-<span class="comment"># Ветвление</span>
-<span class="keyword">if</span> name:
-    <span class="func">print</span>(<span class="string">"Привет,"</span>, name)
-<span class="keyword">else</span>:
-    <span class="func">print</span>(<span class="string">"Имя не введено"</span>)
-
-<span class="comment"># Цикл</span>
-<span class="keyword">for</span> i <span class="keyword">in</span> <span class="func">range</span>(3):
-    <span class="func">print</span>(<span class="string">"Python!"</span>)</div>
-<div class="note" style="margin-top:18px">В Python для основных алгоритмических конструкций используются последовательность команд, <kbd>if</kbd> и циклы <kbd>for</kbd>/<kbd>while</kbd>.</div>
-<div class="footer"><span>АЛГОРИТМ → КОД</span><span>26</span></div></section>
-
-<section class="slide"><div class="kicker">26 · Итоги</div><h2>Главное, что нужно запомнить</h2>
+<section class="slide"><div class="kicker">18 · Блок-схемы</div><h2>Как изображают алгоритмы?</h2>
 <div class="grid">
-<div class="card"><div class="big">1</div><h3>Алгоритм</h3><p>Это понятная последовательность действий для решения задачи.</p></div>
-<div class="card"><div class="big">2</div><h3>Свойства</h3><p>Понятность, определённость, конечность, результативность и исполнимость.</p></div>
-<div class="card"><div class="big">3</div><h3>Линейный</h3><p>Команды идут последовательно.</p></div>
-<div class="card"><div class="big">4</div><h3>Разветвлённый</h3><p>Есть выбор в зависимости от условия.</p></div>
-<div class="card"><div class="big">5</div><h3>Циклический</h3><p>Команды повторяются.</p></div>
-<div class="card"><div class="big">6</div><h3>Программирование</h3><p>Алгоритм можно формализовать и реализовать на языке программирования.</p></div>
+<div class="card"><h3>Основные элементы</h3>
+<p><span class="tag">Овал</span> начало / конец</p>
+<p><span class="tag">Прямоугольник</span> действие / операция</p>
+<p><span class="tag">Ромб</span> условие / выбор</p>
+<p><span class="tag">Стрелка</span> направление выполнения</p></div>
+<div class="card"><h3>Зачем нужны блок-схемы?</h3><ul class="check"><li>помогают увидеть структуру алгоритма;</li><li>удобны до написания кода;</li><li>облегчают объяснение решения;</li><li>помогают найти логические ошибки.</li></ul></div>
 </div>
-<div class="footer"><span>АЛГОРИТМЫ — ФУНДАМЕНТ ПРОГРАММИРОВАНИЯ</span><span>27</span></div></section>
+<div class="footer"><span>БЛОК-СХЕМА = ВИЗУАЛЬНОЕ ПРЕДСТАВЛЕНИЕ АЛГОРИТМА</span><span>19</span></div></section>
 
-<section class="slide"><div class="kicker">27 · Домашняя работа</div><h2>Домашнее задание</h2>
-<div class="card"><h3>Задание 1 · Теория</h3><p>Составьте конспект по теме «Алгоритм. Понятие алгоритма. Типы алгоритмов».</p></div>
-<div class="card" style="margin-top:16px"><h3>Задание 2 · Практика</h3><p>Приведите по <b>2 примера</b> линейного, разветвлённого и циклического алгоритма из реальной жизни.</p></div>
-<div class="card" style="margin-top:16px"><h3>Задание 3 · Творческое</h3><p>Составьте блок-схему любого бытового алгоритма: приготовление еды, поездка в колледж, покупка товара, вход в приложение и т. п.</p></div>
-<div class="footer"><span>ДЗ · ЗАКРЕПЛЕНИЕ ТРЁХ ТИПОВ АЛГОРИТМОВ</span><span>28</span></div></section>
-
-<section class="slide"><div class="kicker">28 · Следующее занятие</div><h2>От алгоритма — к коду</h2>
-<div class="timeline">
-<div class="step"><b>Алгоритм</b><span>Понимаем задачу и описываем решение.</span></div>
-<div class="step"><b>Блок-схема</b><span>Визуализируем логику.</span></div>
-<div class="step"><b>Python</b><span>Записываем алгоритм в виде программы.</span></div>
-<div class="step"><b>Тестирование</b><span>Проверяем разные варианты входных данных.</span></div>
+<section class="slide"><div class="kicker">19 · Практика</div><h2>Определи тип алгоритма</h2>
+<div class="grid">
+<div class="card"><h3>Ситуация A</h3><p>Ввести длину и ширину → вычислить площадь → вывести результат.</p><p class="accent"><b>Какой тип?</b></p></div>
+<div class="card"><h3>Ситуация B</h3><p>Если температура ниже 0 — вывести «мороз», иначе — «не мороз».</p><p class="accent"><b>Какой тип?</b></p></div>
+<div class="card"><h3>Ситуация C</h3><p>Вывести на экран числа от 1 до 100.</p><p class="accent"><b>Какой тип?</b></p></div>
+<div class="card"><h3>Ситуация D</h3><p>Проверить каждый товар в списке и выбрать товары с нужным условием.</p><p class="accent"><b>Какой тип или комбинация?</b></p></div>
 </div>
-<div class="hero" style="margin-top:25px"><p style="font-size:23px">Хороший программист сначала понимает задачу и логику решения, а уже потом пишет код.</p></div>
-<div class="footer"><span>СЛЕДУЮЩИЙ ШАГ · АЛГОРИТМЫ В PYTHON</span><span>29</span></div></section>
+<div class="card" style="margin-top:18px"><p><b>Ответ:</b> A — линейный; B — разветвлённый; C — циклический; D — цикл + разветвление.</p></div>
+<div class="footer"><span>МИНИ-ПРОВЕРКА ПОНИМАНИЯ</span><span>20</span></div></section>
 
-<section class="slide"><div class="center" style="margin:auto 0;text-align:center">
-<div class="kicker">Финал</div><h1>Алгоритм — это<br><span class="accent">логика действия</span></h1>
-<p style="font-size:25px;max-width:850px;margin:auto">Если вы умеете разбить задачу на понятные шаги, вы уже делаете первый шаг к программированию.</p>
-<div class="code" style="max-width:650px;margin:28px auto;text-align:left">Задача
-  ↓
-Алгоритм
-  ↓
-Код
-  ↓
-Программа
-  ↓
-Результат</div>
-<p class="muted">Вопросы?</p>
-</div><div class="footer"><span>АЛГОРИТМИЗАЦИЯ · ОСНОВЫ ПРОГРАММИРОВАНИЯ</span><span>30</span></div></section>
+<section class="slide"><div class="kicker">20 · Практика</div><h2>Составь алгоритм самостоятельно</h2>
+<div class="hero-box card">
+<h3>Задача</h3><p style="font-size:22px">Программа получает число и должна определить, положительное оно, отрицательное или равно нулю.</p>
+</div>
+<div class="grid" style="margin-top:20px">
+<div class="card"><h3>Шаг 1</h3><p>Определите входные данные.</p></div>
+<div class="card"><h3>Шаг 2</h3><p>Определите возможные результаты.</p></div>
+<div class="card"><h3>Шаг 3</h3><p>Сформулируйте условия выбора.</p></div>
+<div class="card"><h3>Шаг 4</h3><p>Запишите алгоритм словами или блок-схемой.</p></div>
+</div>
+<p class="quote" style="margin-top:20px">Не пишите код сразу. Сначала сформулируйте алгоритм.</p>
+<div class="footer"><span>ПРАКТИКА АЛГОРИТМИЧЕСКОГО МЫШЛЕНИЯ</span><span>21</span></div></section>
 
-<div class="nav">
-<button onclick="prev()">←</button><button onclick="next()">→</button><button onclick="toggleFullscreen()">⛶</button>
-</div></div>
+<section class="slide"><div class="kicker">21 · Контроль</div><h2>Контрольные вопросы</h2>
+<div class="grid3">
+<div class="card"><div class="num">01</div><p>Что такое алгоритм? Чем алгоритм отличается от программы?</p></div>
+<div class="card"><div class="num">02</div><p>Какие основные свойства алгоритма вы знаете?</p></div>
+<div class="card"><div class="num">03</div><p>Чем линейный алгоритм отличается от разветвлённого?</p></div>
+<div class="card"><div class="num">04</div><p>Что такое условие и зачем оно нужно?</p></div>
+<div class="card"><div class="num">05</div><p>Что такое цикл? Приведите пример из жизни.</p></div>
+<div class="card"><div class="num">06</div><p>Может ли одна программа содержать все три типа алгоритмов?</p></div>
+</div>
+<div class="footer"><span>УСТНЫЙ ОПРОС / ОБСУЖДЕНИЕ</span><span>22</span></div></section>
+
+<section class="slide"><div class="kicker">22 · Обсуждение</div><h2>Кейс: алгоритм кофейного автомата</h2>
+<div class="card"><p style="font-size:21px"><b>Ситуация:</b> автомат должен приготовить напиток после выбора пользователя.</p></div>
+<div class="grid3" style="margin-top:18px">
+<div class="card"><h3>Линейное</h3><p>Принять заказ → подготовить стакан → приготовить напиток.</p></div>
+<div class="card"><h3>Разветвление</h3><p>Если выбран кофе — один сценарий; если чай — другой.</p></div>
+<div class="card"><h3>Циклическое</h3><p>Повторять проверку готовности до завершения приготовления.</p></div>
+</div>
+<p class="quote" style="margin-top:20px">Задание: найдите минимум по одному алгоритму каждого типа в знакомом вам устройстве или приложении.</p>
+<div class="footer"><span>ОБСУЖДЕНИЕ · 5 МИНУТ</span><span>23</span></div></section>
+
+<section class="slide"><div class="kicker">23 · Итоги</div><h2>Главное, что нужно запомнить</h2>
+<div class="grid">
+<div class="card"><h3>Алгоритм</h3><p>Понятная последовательность действий для решения задачи.</p></div>
+<div class="card"><h3>Линейный</h3><p><b>Действия идут по порядку.</b></p></div>
+<div class="card"><h3>Разветвлённый</h3><p><b>Выбирается путь по условию.</b></p></div>
+<div class="card"><h3>Циклический</h3><p><b>Действия повторяются.</b></p></div>
+</div>
+<div class="card" style="margin-top:18px"><p style="font-size:23px">Перед тем как писать программу, полезно спросить себя: <span class="accent">«Какой алгоритм решит мою задачу?»</span></p></div>
+<div class="footer"><span>АЛГОРИТМИЧЕСКОЕ МЫШЛЕНИЕ — ОСНОВА ПРОГРАММИРОВАНИЯ</span><span>24</span></div></section>
+
+<section class="slide"><div class="kicker">24 · Домашнее задание</div><h2>Домашнее задание</h2>
+<div class="card">
+<h3>Часть 1. Теория</h3>
+<ol class="check"><li>Дать определение алгоритма.</li><li>Записать минимум 5 свойств алгоритма.</li><li>Объяснить разницу между линейным, разветвлённым и циклическим алгоритмами.</li></ol>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>Часть 2. Практика</h3>
+<p>Привести <b>по 2 примера</b> каждого типа алгоритма из реальной жизни:</p>
+<p><span class="tag">2 линейных</span><span class="tag">2 разветвлённых</span><span class="tag">2 циклических</span></p>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>Часть 3. Творческое задание ⭐</h3>
+<p>Составить алгоритм одной бытовой задачи в виде последовательности шагов и нарисовать его блок-схему. Например: «Покупка товара», «Приготовление завтрака», «Поездка в колледж» или своя тема.</p>
+</div>
+<div class="footer"><span>ДЗ · ПОДГОТОВИТЬ К СЛЕДУЮЩЕМУ ЗАНЯТИЮ</span><span>25</span></div></section>
+
+<section class="slide"><div class="center" style="text-align:center">
+<div class="kicker">Финал</div>
+<h1>Сначала <span class="accent">алгоритм</span>.<br>Потом — код.</h1>
+<p style="font-size:25px;max-width:850px;margin:auto">Хороший программист умеет не только писать команды, но и правильно организовывать решение задачи.</p>
+<div class="flow" style="max-width:850px;margin:30px auto;text-align:left">
+<div class="item"><b>Задача</b>Что нужно решить?</div>
+<div class="item"><b>Алгоритм</b>Как решить?</div>
+<div class="item"><b>Код</b>Как записать?</div>
+</div>
+<p class="muted">До следующего занятия — выполнить домашнюю работу.</p>
+</div><div class="footer"><span>ОСНОВЫ АЛГОРИТМИЗАЦИИ</span><span>26</span></div></section>
+
+<div class="nav"><button onclick="prev()">←</button><button onclick="next()">→</button><button onclick="full()">⛶</button></div>
+</div>
 <script>
 const slides=[...document.querySelectorAll('.slide')];let i=0;
-function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%')}
+function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===i));document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%'}
 function next(){show(i+1)} function prev(){show(i-1)}
-function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
-document.addEventListener('keydown',e=>{
-if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
-if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
-if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f')toggleFullscreen()
-});
-let tx=0;document.addEventListener('touchstart',e=>tx=e.changedTouches[0].screenX);
-document.addEventListener('touchend',e=>{let x=e.changedTouches[0].screenX;if(x-tx>50)prev();if(tx-x>50)next()});
-show(0);
+function full(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='f')full()});
+let x=0;document.addEventListener('touchstart',e=>x=e.changedTouches[0].screenX);document.addEventListener('touchend',e=>{let y=e.changedTouches[0].screenX;if(y-x>50)prev();if(x-y>50)next()});show(0);
 </script>
 </body></html>
