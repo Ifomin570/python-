@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Введение в Python — презентация</title>
+<style>
+:root{
+  --bg:#06111f;--bg2:#0a1830;--card:#0d2340;--card2:#102b4d;
+  --blue:#168cff;--cyan:#35c8ff;--text:#eef7ff;--muted:#9fb5cc;
+  --line:rgba(75,160,255,.22);--shadow:0 20px 60px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+body:before{content:"";position:fixed;inset:0;background:
+ radial-gradient(circle at 85% 10%,rgba(22,140,255,.18),transparent 28%),
+ radial-gradient(circle at 10% 90%,rgba(53,200,255,.10),transparent 25%);
+pointer-events:none}
+.deck{height:100vh;position:relative}
+.slide{display:none;height:100vh;padding:54px 7vw 72px;position:relative;overflow:auto}
+.slide.active{display:flex;flex-direction:column;animation:fade .25s ease}
+@keyframes fade{from{opacity:.2;transform:translateX(10px)}to{opacity:1;transform:none}}
+.kicker{color:var(--cyan);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(40px,5vw,76px);line-height:1.02;margin:14px 0 22px;max-width:1050px}
+h2{font-size:clamp(30px,3.6vw,52px);line-height:1.08;margin:10px 0 28px}
+h3{font-size:22px;margin:0 0 10px}
+p,li{font-size:18px;line-height:1.55;color:#d8e8f7}
+.muted{color:var(--muted)}
+.accent{color:var(--cyan)}
+.blue{color:#61aefc}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:linear-gradient(145deg,rgba(16,43,77,.95),rgba(8,27,49,.95));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.card p{margin:6px 0}
+.big-number{font-size:52px;font-weight:800;color:var(--cyan);margin-bottom:5px}
+.tag{display:inline-block;border:1px solid rgba(53,200,255,.4);color:#aeeaff;border-radius:999px;padding:7px 12px;margin:4px;font-size:14px;background:rgba(53,200,255,.06)}
+.code{background:#030b15;border:1px solid #163858;border-radius:15px;padding:20px 22px;font:16px/1.65 Consolas,monospace;color:#cdeaff;white-space:pre-wrap;box-shadow:inset 0 0 30px rgba(0,80,150,.12)}
+.keyword{color:#68b8ff}.string{color:#8ee8d2}.comment{color:#6d8298}.func{color:#d7b4ff}
+.timeline{display:flex;gap:10px;align-items:stretch;margin-top:18px}
+.step{flex:1;padding:17px;border-radius:14px;background:#0c2442;border:1px solid var(--line)}
+.step b{display:block;color:var(--cyan);font-size:22px;margin-bottom:8px}
+.quote{font-size:26px;line-height:1.4;border-left:4px solid var(--blue);padding:8px 0 8px 22px;color:#eaf7ff}
+.check li{margin:9px 0}
+.footer{position:absolute;left:7vw;right:7vw;bottom:22px;display:flex;justify-content:space-between;color:#65819b;font-size:12px}
+.nav{position:fixed;right:24px;bottom:22px;z-index:20;display:flex;gap:8px}
+button{border:1px solid var(--line);background:#0c2442;color:#dff3ff;border-radius:12px;padding:10px 14px;cursor:pointer}
+button:hover{background:#12385f}
+.progress{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0;z-index:30}
+.small{font-size:14px!important}
+.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.center{justify-content:center}
+.hero-box{max-width:1000px;padding:35px;border-radius:24px;background:linear-gradient(135deg,rgba(14,49,85,.9),rgba(6,20,37,.92));border:1px solid rgba(53,200,255,.25)}
+table{border-collapse:collapse;width:100%;font-size:16px}
+td,th{border:1px solid var(--line);padding:12px;text-align:left}
+th{color:var(--cyan);background:#0d2848}
+kbd{background:#102b4d;border:1px solid #245276;border-radius:6px;padding:2px 7px}
+@media(max-width:800px){.grid,.grid3,.two-col{grid-template-columns:1fr}.slide{padding:40px 5vw 70px}.timeline{flex-direction:column}p,li{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="progress" id="progress"></div>
+
+<section class="slide active">
+<div class="center" style="margin:auto 0">
+<div class="kicker">Раздел 1 · Введение в Python</div>
+<h1>Обзор языков программирования<br><span class="accent">и знакомство с Python</span></h1>
+<p style="font-size:24px;max-width:850px">Первое занятие: от идеи программы и алгоритма — к запуску собственной программы на Python.</p>
+<div style="margin-top:24px">
+<span class="tag">90 минут</span><span class="tag">Начинающие</span><span class="tag">Теория + практика</span>
+</div>
+</div>
+<div class="footer"><span>ПРОГРАММИРОВАНИЕ · PYTHON</span><span>01</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">01 · Старт</div><h2>Что мы сегодня узнаем?</h2>
+<div class="grid3">
+<div class="card"><div class="big-number">01</div><h3>Программирование</h3><p>Что такое программа, алгоритм и язык программирования.</p></div>
+<div class="card"><div class="big-number">02</div><h3>Парадигмы</h3><p>Почему существуют разные подходы к созданию программ.</p></div>
+<div class="card"><div class="big-number">03</div><h3>Языки</h3><p>Чем отличаются Python, C++, Java, JavaScript и другие.</p></div>
+<div class="card"><div class="big-number">04</div><h3>Python</h3><p>История, особенности, философия и области применения.</p></div>
+<div class="card"><div class="big-number">05</div><h3>Инструменты</h3><p>Интерпретатор, среда разработки и запуск программы.</p></div>
+<div class="card"><div class="big-number">06</div><h3>Практика</h3><p>Напишем и запустим первую интерактивную программу.</p></div>
+</div>
+<div class="footer"><span>ЦЕЛЬ: ПОНЯТЬ + ПОПРОБОВАТЬ</span><span>02</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">02 · Основы</div><h2>Что такое программирование?</h2>
+<div class="two-col">
+<div>
+<p class="quote">Программирование — это процесс разработки инструкций для компьютера, которые позволяют решать определённую задачу.</p>
+<p>Компьютер очень быстро выполняет инструкции, но сам по себе не «догадывается», что именно нужно сделать.</p>
+</div>
+<div class="card">
+<h3>Пример из жизни</h3>
+<p><b>Задача:</b> приготовить чай.</p>
+<ol class="check">
+<li>Налить воду.</li><li>Нагреть воду.</li><li>Положить чай.</li><li>Залить водой.</li><li>Подождать.</li>
+</ol>
+<p class="muted">Это последовательность действий — простой алгоритм.</p>
+</div>
+</div>
+<div class="footer"><span>ПРОГРАММА = ИНСТРУКЦИИ ДЛЯ РЕШЕНИЯ ЗАДАЧИ</span><span>03</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">03 · Основы</div><h2>Алгоритм → программа</h2>
+<div class="grid">
+<div class="card"><h3>Алгоритм</h3><p>Понятная последовательность действий, приводящая к результату.</p>
+<p><span class="tag">Входные данные</span> → <span class="tag">Действия</span> → <span class="tag">Результат</span></p></div>
+<div class="card"><h3>Программа</h3><p>Алгоритм, записанный на языке, правила которого понимают инструменты компьютера.</p>
+<p><span class="tag">Код</span> → <span class="tag">Интерпретатор / компилятор</span> → <span class="tag">Выполнение</span></p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Мини-пример</h3><div class="code">Задача: сложить два числа
+
+1. Получить первое число
+2. Получить второе число
+3. Сложить их
+4. Показать результат</div></div>
+<div class="footer"><span>МЫСЛИТЬ АЛГОРИТМАМИ — ВАЖНЕЕ, ЧЕМ ЗНАТЬ СИНТАКСИС</span><span>04</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">04 · Языки</div><h2>Что такое язык программирования?</h2>
+<div class="hero-box">
+<p style="font-size:24px">Язык программирования — формальный язык для записи алгоритмов и инструкций, которые затем выполняются компьютером.</p>
+</div>
+<div class="timeline">
+<div class="step"><b>1 · Человек</b><span class="muted">Формулирует задачу</span></div>
+<div class="step"><b>2 · Код</b><span class="muted">Записывает решение</span></div>
+<div class="step"><b>3 · Инструмент</b><span class="muted">Интерпретирует или компилирует код</span></div>
+<div class="step"><b>4 · Компьютер</b><span class="muted">Выполняет инструкции</span></div>
+</div>
+<p class="muted">Важно: разные языки дают разные способы выразить одну и ту же идею.</p>
+<div class="footer"><span>ЯЗЫК — ИНСТРУМЕНТ ВЫРАЖЕНИЯ АЛГОРИТМА</span><span>05</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">05 · Языки</div><h2>Почему языков так много?</h2>
+<div class="grid3">
+<div class="card"><h3>⚡ Производительность</h3><p>Для системного ПО важны скорость, память и контроль ресурсов.</p></div>
+<div class="card"><h3>🌐 Платформа</h3><p>Веб, мобильные устройства, серверы, микроконтроллеры требуют разных инструментов.</p></div>
+<div class="card"><h3>👥 Команда</h3><p>Язык выбирают с учётом экосистемы, специалистов и уже существующих систем.</p></div>
+<div class="card"><h3>🧩 Задача</h3><p>Для анализа данных удобен один набор инструментов, для драйверов — другой.</p></div>
+<div class="card"><h3>📚 Экосистема</h3><p>Библиотеки, фреймворки, IDE и сообщества сильно влияют на выбор.</p></div>
+<div class="card"><h3>🧠 Подход</h3><p>Языки поддерживают разные способы организации программного кода.</p></div>
+</div>
+<div class="footer"><span>НЕТ «ЛУЧШЕГО ЯЗЫКА» ДЛЯ ВСЕХ ЗАДАЧ</span><span>06</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">06 · Обзор</div><h2>Современные языки: кто чем занимается?</h2>
+<table>
+<tr><th>Язык</th><th>Типичные области</th><th>Что важно понимать новичку</th></tr>
+<tr><td>🐍 Python</td><td>AI, Data Science, автоматизация, веб, обучение</td><td>Читаемый синтаксис и большая экосистема</td></tr>
+<tr><td>🌐 JavaScript</td><td>Веб-интерфейсы, серверная разработка</td><td>Ключевой язык веб-платформы</td></tr>
+<tr><td>⚙️ C / C++</td><td>Системы, устройства, игровые движки</td><td>Высокий контроль над ресурсами</td></tr>
+<tr><td>☕ Java</td><td>Корпоративные системы, серверы, Android-проекты</td><td>Строгая структура и зрелая экосистема</td></tr>
+<tr><td>💜 C#</td><td>.NET, приложения, игры</td><td>Сильная экосистема Microsoft/.NET</td></tr>
+<tr><td>📱 Kotlin / Swift</td><td>Android / Apple-платформы</td><td>Современные мобильные инструменты</td></tr>
+</table>
+<div class="footer"><span>ЯЗЫК ВЫБИРАЮТ ПОД ЗАДАЧУ</span><span>07</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">07 · Парадигмы</div><h2>Что такое парадигма программирования?</h2>
+<div class="hero-box">
+<p style="font-size:24px"><b>Парадигма</b> — это общий подход к построению программы и способ мышления при решении задач.</p>
+<p class="muted">Один язык может поддерживать несколько парадигм. Python — как раз такой язык.</p>
+</div>
+<div class="grid3" style="margin-top:20px">
+<div class="card"><h3>Процедурная</h3><p>«Сделай шаг 1 → шаг 2 → шаг 3».</p></div>
+<div class="card"><h3>Объектно-ориентированная</h3><p>«Опиши объекты, их данные и поведение».</p></div>
+<div class="card"><h3>Функциональная</h3><p>«Преобразуй данные с помощью функций».</p></div>
+</div>
+<div class="footer"><span>ПАРАДИГМА = СПОСОБ ОРГАНИЗОВАТЬ МЫШЛЕНИЕ И КОД</span><span>08</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">08 · Парадигмы</div><h2>Процедурное программирование</h2>
+<div class="two-col">
+<div>
+<p class="quote">Программа рассматривается как последовательность команд и процедур, которые изменяют состояние программы.</p>
+<div class="card"><h3>Аналогия</h3><p>Рецепт: взять ингредиент → выполнить действие → перейти к следующему шагу.</p></div>
+</div>
+<div class="code"><span class="comment"># Псевдокод</span>
+<span class="keyword">start</span>
+&nbsp;&nbsp;получить число
+&nbsp;&nbsp;прибавить 10
+&nbsp;&nbsp;вывести результат
+<span class="keyword">finish</span></div>
+</div>
+<p><b>Примеры языков:</b> C, Pascal. Процедурный стиль также можно использовать в Python.</p>
+<div class="footer"><span>ЛОГИКА: ПОСЛЕДОВАТЕЛЬНОСТЬ ДЕЙСТВИЙ</span><span>09</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">09 · Парадигмы</div><h2>Объектно-ориентированное программирование</h2>
+<div class="grid">
+<div class="card"><h3>Объект</h3><p>Конкретная сущность программы: пользователь, автомобиль, заказ, файл.</p></div>
+<div class="card"><h3>Свойства</h3><p>Данные объекта: имя, цвет, цена, состояние.</p></div>
+<div class="card"><h3>Методы</h3><p>Действия объекта: открыть(), оплатить(), запустить().</p></div>
+<div class="card"><h3>Класс</h3><p>Описание, по которому создаются объекты одного типа.</p></div>
+</div>
+<div class="code" style="margin-top:18px"><span class="keyword">class</span> Cat:
+&nbsp;&nbsp;name = <span class="string">"Барсик"</span>
+
+&nbsp;&nbsp;<span class="keyword">def</span> meow():
+&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Мяу!"</span>)</div>
+<p class="muted">На первом занятии достаточно понимать идею: программа может моделировать сущности реального или цифрового мира.</p>
+<div class="footer"><span>ЛОГИКА: ОБЪЕКТЫ + ДАННЫЕ + ПОВЕДЕНИЕ</span><span>10</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">10 · Парадигмы</div><h2>Функциональное программирование</h2>
+<div class="two-col">
+<div>
+<p class="quote">В центре внимания — функции и преобразование данных.</p>
+<p>Функция получает входные данные и возвращает результат.</p>
+<div class="card"><h3>Математическая аналогия</h3><p style="font-size:24px">f(x) = x × x</p><p>Если x = 5, результат = 25.</p></div>
+</div>
+<div class="code"><span class="comment"># Идея функции</span>
+<span class="keyword">def</span> <span class="func">square</span>(x):
+&nbsp;&nbsp;<span class="keyword">return</span> x * x
+
+result = square(5)
+print(result)</div>
+</div>
+<p class="muted">Python поддерживает функциональные элементы, но не является «только функциональным» языком.</p>
+<div class="footer"><span>ЛОГИКА: ДАННЫЕ → ФУНКЦИЯ → РЕЗУЛЬТАТ</span><span>11</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">11 · Python</div><h2>Python: с чего всё началось?</h2>
+<div class="timeline">
+<div class="step"><b>1989–1990</b><span>Гвидо ван Россум начал работу над новым языком.</span></div>
+<div class="step"><b>1991</b><span>Появилась первая публичная версия Python.</span></div>
+<div class="step"><b>2000</b><span>Python 2.0: важный этап развития языка.</span></div>
+<div class="step"><b>2008</b><span>Python 3.0: современная ветка языка.</span></div>
+</div>
+<div class="card" style="margin-top:25px">
+<h3>Ключевая идея</h3>
+<p>Язык проектировался с акцентом на читаемость, ясность и продуктивность разработчика.</p>
+</div>
+<div class="footer"><span>СОЗДАТЕЛЬ: GUIDO VAN ROSSUM</span><span>12</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">12 · Python</div><h2>Философия Python</h2>
+<p class="quote">Python стремится делать код понятным человеку и не заставлять программиста писать лишнее.</p>
+<div class="grid3">
+<div class="card"><h3>Читаемость</h3><p>Код должен быть понятен не только компьютеру, но и человеку.</p></div>
+<div class="card"><h3>Простота</h3><p>При прочих равных простое решение предпочтительнее сложного.</p></div>
+<div class="card"><h3>Ясность</h3><p>Структура программы должна помогать понять намерение автора.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Мини-эксперимент</h3><p>В интерактивном интерпретаторе можно выполнить:</p><div class="code"><span class="keyword">import</span> this</div><p class="muted small">Интерпретатор покажет «Дзен Python» — набор принципов, связанных со стилем языка.</p></div>
+<div class="footer"><span>КОД ПИШЕТСЯ ДЛЯ ЛЮДЕЙ</span><span>13</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">13 · Python</div><h2>Почему Python удобен для начинающих?</h2>
+<div class="grid">
+<div class="card"><h3>① Читаемый синтаксис</h3><p>Меньше служебных конструкций, легче увидеть логику.</p></div>
+<div class="card"><h3>② Быстрый старт</h3><p>Можно написать небольшую программу буквально из нескольких строк.</p></div>
+<div class="card"><h3>③ Большая экосистема</h3><p>Множество библиотек и инструментов для разных задач.</p></div>
+<div class="card"><h3>④ Кросс-платформенность</h3><p>Python доступен для Windows, macOS и Linux.</p></div>
+<div class="card"><h3>⑤ Большое сообщество</h3><p>Много учебных материалов, документации и готовых решений.</p></div>
+<div class="card"><h3>⑥ Подходит для разных областей</h3><p>От учебных программ до анализа данных и серверных приложений.</p></div>
+</div>
+<div class="footer"><span>ЦЕЛЬ: МЕНЬШЕ БАРЬЕРОВ НА СТАРТЕ</span><span>14</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">14 · Python</div><h2>Особенности Python</h2>
+<div class="grid">
+<div class="card"><h3>Высокоуровневый</h3><p>Много технических деталей скрыто от разработчика.</p></div>
+<div class="card"><h3>Динамическая типизация</h3><p>Тип значения связан с объектом и может меняться у переменной в процессе работы программы.</p></div>
+<div class="card"><h3>Интерпретатор</h3><p>Код запускается средствами Python без отдельной ручной компиляции каждого файла пользователем.</p></div>
+<div class="card"><h3>Отступы значимы</h3><p>Блоки кода в Python оформляются структурой отступов.</p></div>
+</div>
+<div class="code" style="margin-top:18px">name = <span class="string">"Alice"</span>
+age = 25
+
+age = <span class="string">"twenty five"</span>  <span class="comment"># переменная теперь связана со строковым значением</span></div>
+<div class="footer"><span>ОСОБЕННОСТИ ВЛИЯЮТ НА СТИЛЬ НАПИСАНИЯ КОДА</span><span>15</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">15 · Python</div><h2>Где применяется Python?</h2>
+<div class="grid3">
+<div class="card"><h3>🤖 AI / ML</h3><p>Машинное обучение, нейронные сети, обработка данных.</p><span class="tag">PyTorch</span><span class="tag">TensorFlow</span></div>
+<div class="card"><h3>📊 Data Science</h3><p>Анализ, обработка и визуализация данных.</p><span class="tag">NumPy</span><span class="tag">pandas</span></div>
+<div class="card"><h3>🌐 Веб</h3><p>Серверная разработка и веб-приложения.</p><span class="tag">Django</span><span class="tag">Flask</span></div>
+<div class="card"><h3>⚙️ Автоматизация</h3><p>Файлы, отчёты, рутинные операции, интеграции.</p></div>
+<div class="card"><h3>🔎 Парсинг</h3><p>Получение и обработка информации из веб-источников.</p></div>
+<div class="card"><h3>🎮 Обучение и игры</h3><p>Учебные проекты, прототипы и небольшие игры.</p><span class="tag">Pygame</span></div>
+</div>
+<div class="footer"><span>ОДИН ЯЗЫК — МНОГО СЦЕНАРИЕВ ПРИМЕНЕНИЯ</span><span>16</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">16 · Инструменты</div><h2>Как Python-программа запускается?</h2>
+<div class="timeline">
+<div class="step"><b>① Код</b><span>Файл <kbd>.py</kbd> содержит инструкции.</span></div>
+<div class="step"><b>② Python</b><span>Интерпретатор читает программу.</span></div>
+<div class="step"><b>③ Выполнение</b><span>Команды выполняются, появляются результаты.</span></div>
+</div>
+<div class="grid" style="margin-top:22px">
+<div class="card"><h3>Интерактивный режим</h3><p>Команды вводятся прямо в интерпретаторе.</p><div class="code">>>> 2 + 2
+4</div></div>
+<div class="card"><h3>Файл программы</h3><p>Код сохраняется в файл, например <kbd>first_program.py</kbd>.</p><div class="code">python first_program.py</div></div>
+</div>
+<div class="footer"><span>ДВА УДОБНЫХ СПОСОБА НАЧАТЬ ЭКСПЕРИМЕНТИРОВАТЬ</span><span>17</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">17 · Практика</div><h2>Практика 1. Python как калькулятор</h2>
+<p>Откройте Python или онлайн-интерпретатор и выполните команды по очереди.</p>
+<div class="code">2 + 2
+10 - 3
+5 * 6
+20 / 4
+2 ** 3</div>
+<div class="grid" style="margin-top:18px">
+<div class="card"><h3>Что получилось?</h3><p>Python умеет выполнять арифметические выражения и сразу возвращать результат.</p></div>
+<div class="card"><h3>Мини-вопрос</h3><p>Что означает оператор <kbd>**</kbd>? Попробуйте изменить числа и проверить гипотезу.</p></div>
+</div>
+<div class="footer"><span>ПРАКТИКА · 5 МИНУТ</span><span>18</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">18 · Практика</div><h2>Практика 2. Первая команда print()</h2>
+<div class="code"><span class="func">print</span>(<span class="string">"Hello, World!"</span>)
+<span class="func">print</span>(<span class="string">"Привет, мир!"</span>)
+<span class="func">print</span>(2 + 2)</div>
+<div class="grid" style="margin-top:18px">
+<div class="card"><h3>print()</h3><p>Функция выводит информацию в консоль.</p></div>
+<div class="card"><h3>Попробуйте сами</h3><p>Замените текст внутри кавычек на своё имя, любимый предмет или фразу.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Важно</h3><p>Текст обычно записывается в кавычках. Числовое выражение можно передать без кавычек.</p></div>
+<div class="footer"><span>ПРАКТИКА · 5 МИНУТ</span><span>19</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">19 · Практика</div><h2>Практика 3. Переменные</h2>
+<div class="code">name = <span class="string">"Иван"</span>
+age = 17
+
+<span class="func">print</span>(name)
+<span class="func">print</span>(age)
+<span class="func">print</span>(name, age)</div>
+<div class="grid" style="margin-top:18px">
+<div class="card"><h3>Что такое переменная?</h3><p>Имя, через которое программа обращается к некоторому значению.</p></div>
+<div class="card"><h3>Присваивание</h3><p>Знак <kbd>=</kbd> связывает имя с результатом выражения справа.</p></div>
+</div>
+<div class="footer"><span>ПРАКТИКА · 5 МИНУТ</span><span>20</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">20 · Практика</div><h2>Практика 4. Ввод данных</h2>
+<div class="code">name = <span class="func">input</span>(<span class="string">"Как тебя зовут? "</span>)
+<span class="func">print</span>(<span class="string">"Привет,"</span>, name)</div>
+<div class="two-col" style="margin-top:18px">
+<div class="card"><h3>input()</h3><p>Останавливает выполнение программы и ждёт, пока пользователь введёт данные.</p></div>
+<div class="card"><h3>Интерактивность</h3><p>Теперь программа реагирует на действия человека, а не просто показывает заранее заданный текст.</p></div>
+</div>
+<p class="muted">Попробуйте самостоятельно заменить сообщение и добавить второй вопрос.</p>
+<div class="footer"><span>ПРАКТИКА · 5 МИНУТ</span><span>21</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">21 · Мини-проект</div><h2>Моя первая программа</h2>
+<div class="code"><span class="comment"># Моя первая интерактивная программа</span>
+
+<span class="func">print</span>(<span class="string">"=== МОЯ ВИЗИТКА ==="</span>)
+
+name = <span class="func">input</span>(<span class="string">"Как тебя зовут? "</span>)
+city = <span class="func">input</span>(<span class="string">"В каком городе ты живёшь? "</span>)
+dream = <span class="func">input</span>(<span class="string">"Что ты хочешь научиться создавать? "</span>)
+
+<span class="func">print</span>()
+<span class="func">print</span>(<span class="string">"Привет,"</span>, name)
+<span class="func">print</span>(<span class="string">"Твой город:"</span>, city)
+<span class="func">print</span>(<span class="string">"Твоя цель:"</span>, dream)</div>
+<div class="card" style="margin-top:16px"><p><b>Задача:</b> запустить программу, проверить каждый ввод и затем изменить её под себя.</p></div>
+<div class="footer"><span>ПРАКТИКА · 10–15 МИНУТ</span><span>22</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">22 · Практика</div><h2>Если программа не работает — это нормально</h2>
+<div class="grid3">
+<div class="card"><h3>1. Синтаксис</h3><p>Проверьте кавычки, скобки, двоеточия и отступы.</p></div>
+<div class="card"><h3>2. Имя</h3><p>Проверьте, одинаково ли написано имя переменной.</p></div>
+<div class="card"><h3>3. Ошибка</h3><p>Прочитайте сообщение Python: оно часто подсказывает место проблемы.</p></div>
+<div class="card"><h3>4. Строка</h3><p>Посмотрите, на какой строке произошла ошибка.</p></div>
+<div class="card"><h3>5. Проверка</h3><p>Уберите часть кода и найдите место, где программа перестаёт работать.</p></div>
+<div class="card"><h3>6. Вопрос</h3><p>Не бойтесь спрашивать: отладка — нормальная часть программирования.</p></div>
+</div>
+<div class="quote" style="margin-top:20px">Ошибка — не провал. Ошибка показывает, что программе нужно уточнение или исправление.</div>
+<div class="footer"><span>ОТЛАДКА — ЧАСТЬ ПРОГРАММИРОВАНИЯ</span><span>23</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">23 · Закрепление</div><h2>Проверь себя</h2>
+<div class="grid">
+<div class="card"><h3>Вопрос 1</h3><p>Что такое язык программирования?</p></div>
+<div class="card"><h3>Вопрос 2</h3><p>Что называют парадигмой программирования?</p></div>
+<div class="card"><h3>Вопрос 3</h3><p>Назовите три языка программирования и область их применения.</p></div>
+<div class="card"><h3>Вопрос 4</h3><p>Кто создал Python и когда появилась первая публичная версия?</p></div>
+<div class="card"><h3>Вопрос 5</h3><p>Назовите минимум три особенности Python.</p></div>
+<div class="card"><h3>Вопрос 6</h3><p>Для чего используются <kbd>print()</kbd> и <kbd>input()</kbd>?</p></div>
+</div>
+<div class="footer"><span>УСТНЫЙ ОПРОС · 3–5 МИНУТ</span><span>24</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">24 · Обсуждение</div><h2>Кейс: какой язык выбрать?</h2>
+<div class="hero-box">
+<p style="font-size:22px"><b>Ситуация:</b> команде нужно создать систему, которая принимает большой объём данных, анализирует их и строит прогноз.</p>
+</div>
+<div class="grid3" style="margin-top:20px">
+<div class="card"><h3>Вариант A</h3><p>Python</p><p class="muted">Сильная экосистема для данных и машинного обучения.</p></div>
+<div class="card"><h3>Вариант B</h3><p>C++</p><p class="muted">Высокая производительность и контроль ресурсов.</p></div>
+<div class="card"><h3>Вариант C</h3><p>JavaScript</p><p class="muted">Особенно силён в веб-интерфейсах и веб-приложениях.</p></div>
+</div>
+<p><b>Обсудите:</b> какой вариант выбрали бы вы и какие дополнительные вопросы задали бы перед выбором?</p>
+<div class="footer"><span>КЕЙС · 5 МИНУТ</span><span>25</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">25 · Рефлексия</div><h2>Что мы сегодня сделали?</h2>
+<div class="grid3">
+<div class="card"><div class="big-number">01</div><p>Разобрались, что такое программирование, алгоритм и язык.</p></div>
+<div class="card"><div class="big-number">02</div><p>Познакомились с основными парадигмами.</p></div>
+<div class="card"><div class="big-number">03</div><p>Сравнили популярные языки.</p></div>
+<div class="card"><div class="big-number">04</div><p>Узнали историю и особенности Python.</p></div>
+<div class="card"><div class="big-number">05</div><p>Познакомились с <kbd>print()</kbd>, переменными и <kbd>input()</kbd>.</p></div>
+<div class="card"><div class="big-number">06</div><p>Создали первую интерактивную программу.</p></div>
+</div>
+<div class="quote" style="margin-top:20px">Главный результат первого занятия: <b>вы уже умеете отдавать компьютеру команды и получать результат.</b></div>
+<div class="footer"><span>ИТОГ</span><span>26</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">26 · Домашняя работа</div><h2>Домашнее задание</h2>
+<div class="card">
+<h3>Основное задание — программа</h3>
+<p>Создайте программу, которая:</p>
+<ol class="check">
+<li>спрашивает имя пользователя;</li>
+<li>спрашивает город;</li>
+<li>спрашивает, чему пользователь хочет научиться;</li>
+<li>выводит красиво оформленную информацию.</li>
+</ol>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>Теоретическое задание</h3>
+<p>Подготовьте краткий конспект: <b>«История ПК и его устройство. Модуль 0. История создания ПК. Введение в персональный компьютер».</b></p>
+</div>
+<div class="footer"><span>ДЗ · ПОВТОРИТЬ КОД И ПОДГОТОВИТЬ КОНСПЕКТ</span><span>27</span></div>
+</section>
+
+<section class="slide">
+<div class="kicker">27 · Следующий шаг</div><h2>Куда движемся дальше?</h2>
+<div class="timeline">
+<div class="step"><b>01</b><span>Переменные и типы данных</span></div>
+<div class="step"><b>02</b><span>Операции и выражения</span></div>
+<div class="step"><b>03</b><span>Условия if / elif / else</span></div>
+<div class="step"><b>04</b><span>Циклы</span></div>
+<div class="step"><b>05</b><span>Списки и коллекции</span></div>
+</div>
+<div class="card" style="margin-top:24px">
+<h3>Главный принцип курса</h3>
+<p style="font-size:24px">Каждую новую конструкцию мы будем не только изучать, но и применять в программе.</p>
+</div>
+<div class="footer"><span>ОТ ПРОСТОГО КОДА → К ПОЛНОЦЕННЫМ ПРОЕКТАМ</span><span>28</span></div>
+</section>
+
+<section class="slide">
+<div class="center" style="margin:auto 0;text-align:center">
+<div class="kicker">Финал</div>
+<h1>Добро пожаловать<br><span class="accent">в мир Python!</span></h1>
+<p style="font-size:24px;max-width:850px;margin:0 auto">Следующий шаг — научиться управлять данными, принимать решения и повторять действия с помощью кода.</p>
+<div class="code" style="max-width:650px;margin:28px auto;text-align:left"><span class="func">print</span>(<span class="string">"Начало положено!"</span>)</div>
+<p class="muted">Вопросы?</p>
+</div>
+<div class="footer"><span>РАЗДЕЛ 1 · ВВЕДЕНИЕ В PYTHON</span><span>29</span></div>
+</section>
+
+<div class="nav">
+<button onclick="prev()">←</button><button onclick="next()">→</button>
+<button onclick="toggleFullscreen()">⛶</button>
+</div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')]; let i=0;
+function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===i));document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';}
+function next(){show(i+1)} function prev(){show(i-1)}
+function toggleFullscreen(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+document.addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()} if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()} if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key==='f'||e.key==='F')toggleFullscreen()});
+let touchX=0;document.addEventListener('touchstart',e=>touchX=e.changedTouches[0].screenX);document.addEventListener('touchend',e=>{let x=e.changedTouches[0].screenX;if(x-touchX>50)prev();if(touchX-x>50)next()});
+show(0);
+</script>
+</body>
+</html>
